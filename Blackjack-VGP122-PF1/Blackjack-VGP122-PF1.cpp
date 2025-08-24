@@ -40,8 +40,9 @@ public:
     Card draw() {
         Card c = cards.back();
         cards.pop_back();
-        std::cout << "[DEBUG] Drew card: " << c.rank << " of " << c.suit
-            << " (value " << c.value << ")\n";
+		// [DEBUG] Uncomment the next line to see drawn cards in debug mode
+        /* std::cout << "[DEBUG] Drew card: " << c.rank << " of " << c.suit
+            << " (value " << c.value << ")\n"; */
         return c;
     }
 
@@ -131,6 +132,20 @@ void printBustedBanner() {
     std::cout << "\\================================================/\n";
 }
 
+void printBlackjackBanner() {
+    std::cout << R"(
+.------------------------------------------------------------------------.
+|.------..------..------..------..------..------..------..------..------.|
+||B.--. ||L.--. ||A.--. ||C.--. ||K.--. ||J.--. ||A.--. ||C.--. ||K.--. ||
+|| :(): || :/\: || (\/) || :/\: || :/\: || :(): || (\/) || :/\: || :/\: ||
+|| ()() || (__) || :\/: || :\/: || :\/: || ()() || :\/: || :\/: || :\/: ||
+|| '--'B|| '--'L|| '--'A|| '--'C|| '--'K|| '--'J|| '--'A|| '--'C|| '--'K||
+|`------'`------'`------'`------'`------'`------'`------'`------'`------'|
+'------------------------------------------------------------------------'
+    )" << "\n\n";
+}
+
+
 // ---------------- Game Logic ----------------
 int main() {
     printBanner();
@@ -169,6 +184,7 @@ int main() {
             continue;
         }
         else if (playerVal == 21) {
+            printBlackjackBanner();
             std::cout << "Blackjack! You win 1.5x your bet.\n";
             credits += (int)(bet * 1.5);
             continue;
